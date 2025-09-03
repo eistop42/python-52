@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Пример скрытия и показа текста</title>
+<style>
+  #text {
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<button id="toggleButton">Показать текст</button>
+
+<div id="text" style="display: none;">
+  Это текст, который можно показать или скрыть по кнопке.
+</div>
+
+<script>
+  const button = document.getElementById('toggleButton');
+  const text = document.getElementById('text');
+
+  button.addEventListener('click', () => {
+    if (text.style.display === 'none') {
+      text.style.display = 'block';      // Показываем текст
+      button.textContent = 'Скрыть текст'; // Меняем текст кнопки
+    } else {
+      text.style.display = 'none';       // Скрываем текст
+      button.textContent = 'Показать текст'; // Меняем текст кнопки обратно
+    }
+  });
+</script>
+
+</body>
+</html>

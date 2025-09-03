@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+<p>Главная страница 1</p>
+<div id="users" class="my_class">
+    {{my_users}}
+    <h3>{{my_users[0]}}</h3>
+    <h3>{{my_users[1]}}</h3>
+</div>
+
+<script>
+    document.getElementById('users').style.color = 'red'
+</script>
+
+</body>
+</html>
