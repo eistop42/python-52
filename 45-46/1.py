@@ -1,0 +1,54 @@
+import requests
+import random
+import time
+
+from db import get_work_days_keyboard, get_slots_free_keyboard
+
+
+token = "8381198556:AAHf378Akb8iyfr4v2qxjM45YVK4SwOg188"
+base_url = "https://api.telegram.org/bot" + token
+
+getme_url = base_url + '/getMe' # тестирование
+updates_url = base_url + '/getUpdates' # получить все сообщения
+send_message_url = base_url + '/sendMessage'
+my_id = 158448812
+
+
+last_update_id = 0
+state = None
+
+while True:
+    updates = requests.get(updates_url, json={'offset': last_update_id+1}).json()
+    for res in updates['result']:
+        update_id = res['update_id']
+
+        message = res['message']
+        text = message['text']
+        chat_id = message['chat']['id']
+
+        print(message)
+        if text == '/start':
+            keyboard = {"keyboard": [['Записаться']]}
+            requests.get(send_message_url, json={'text': "Привет! Это бот для записи на ресницы! Кликай на кнопки.", "chat_id": chat_id, 'reply_markup': keyboard})
+
+        elif text == 'Записаться':
+            keyboard = get_work_days_keyboard()
+            requests.get(send_message_url, json={'text': text, 'chat_id': chat_id, 'reply_markup': keyboard})
+
+            state = 'choose_date'
+
+        elif state == 'choose_date':
+            print('логи', text, keyboard, state)
+            if [text] in keyboard['keyboard']:
+                # находим свободные слоты по текущей дате
+                keyboard = get_slots_free_keyboard(text)
+                requests.get(send_message_url, json={'text': 'выбирай время', 'chat_id': chat_id, 'reply_markup': keyboard})
+                state = 'choose_time'
+            else:
+                requests.get(send_message_url, json={'text': 'не понимаю...', 'chat_id': chat_id})
+
+    if updates['result']:
+        last_update_id = update_id
+        print(last_update_id)
+
+    time.sleep(0.5)
