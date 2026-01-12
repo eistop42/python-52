@@ -5,7 +5,7 @@ import time
 from db import get_work_days_keyboard, get_slots_free_keyboard, create_zayavka
 
 
-token = ""
+token = "8381198556:AAHf378Akb8iyfr4v2qxjM45YVK4SwOg188"
 base_url = "https://api.telegram.org/bot" + token
 
 getme_url = base_url + '/getMe' # тестирование
