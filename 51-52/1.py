@@ -3,6 +3,10 @@ import random
 import time
 
 from db import get_work_days_keyboard, get_slots_free_keyboard, create_zayavka
+from db_2 import read_database, write_database
+
+
+read_database()
 
 
 token = "8381198556:AAHf378Akb8iyfr4v2qxjM45YVK4SwOg188"

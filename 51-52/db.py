@@ -2,7 +2,9 @@ import json
 from datetime import datetime, timedelta
 from pprint import pprint
 
-def read_database(filename: str):
+
+filename = 'data.json'
+def read_database():
     """Чтение файла базы данных"""
     with open(filename, 'r', encoding='utf-8') as f:
         data = json.load(f)

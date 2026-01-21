@@ -5,16 +5,21 @@ class Calculator:
         self.limit = init_limit
 
     def sum(self, number1, number2):
-        if self.operations < self.limit:
+        if self.check_limit():
             self.operations += 1
             return number1 + number2
         raise ValueError('истекли операции')
 
     def subtract(self, number1, number2):
-        if self.operations < self.limit:
+        if self.check_limit():
             self.operations += 1
             return number1 - number2
         raise ValueError('истекли операции')
+
+    def check_limit(self):
+        if self.operations < self.limit:
+            return True
+        return False
 
 
 my_calc = Calculator(init_limit=2)
