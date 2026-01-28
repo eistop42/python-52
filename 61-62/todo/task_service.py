@@ -23,4 +23,9 @@ class TaskService:
         # 2. Если нет - написать
         # 3. Если есть - перебрать задачи и удалить нужную
         # 4. Сохранить измененный список в базу
-        pass
+        if number < 0 or number > len(self.tasks):
+            print('Неправильный номер задачи')
+            return
+        self.tasks.pop(number-1)
+        self.db.write_data(self.tasks)
+        print('Удалили задачу')
